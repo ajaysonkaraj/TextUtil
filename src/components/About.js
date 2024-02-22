@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About(props) {
   return (
-    <div className="my-4" id="ajju">
+    <div className="my-4" id="#">
         <div className="my-4" style={{backgroundColor:'blue', height:'5px'}}></div>
       <h2
         style={{

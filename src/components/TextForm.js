@@ -1,4 +1,4 @@
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 import React, { useState } from "react";
 
 export default function TextForm(props) {
@@ -6,10 +6,14 @@ export default function TextForm(props) {
     // console.log("Uppercase was clicked" + text);
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to Upper Case !!" ,"success");
+
   };
   const handleLcClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to Lower Case !!" ,"success");
+
   };
 
   const handleOnChange = (event) => {
@@ -21,16 +25,21 @@ export default function TextForm(props) {
     let text = document.getElementById("myBox");
     text.select();
     navigator.clipboard.writeText(text.value);
+    props.showAlert("Text copied" ,"success");
   }
 
   const handleExtraSpace = ()=>{
     let newText =text.split(/[ ]+/);
     setText(newText.join(" "))
+    props.showAlert("Removed Extra spaces" ,"success");
+
   }
 
   const handleClear =()=>{
     let newText = '';
     setText(newText)
+    props.showAlert("Text cleared" ,"success");
+
   }
 
 

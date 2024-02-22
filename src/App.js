@@ -1,37 +1,55 @@
 import { useState } from "react";
-import "./App.css"; // importing css file
+import "./App.css"; 
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
+import Alert from "./components/Alert";
 
-let name = " my name is ajay , how are you guys!!!";
-
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 function App() {
-  //component function
+  
+  const [mode, setMode] = useState("light");
+  const [alert, setAlert] = useState(null);
 
-  const[mode, setMode] =useState('light');
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+  };
 
-  const toggleMode = ()=>{
-    if(mode ==='light'){
-      setMode('dark')
-      document.body.style.background= '#192734'
+  const toggleMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      document.body.style.background = "#192734";
+      showAlert("Dark Mode has been enabled", "success");
+    } else {
+      setMode("light");
+      document.body.style.background = "white";
+      showAlert("Light Mode has been enabled", "success");
     }
-    else{
-      setMode('light')
-      document.body.style.background= 'white'
-
-    }
-  }
+  };
 
   return (
-    <div >
-      <Navbar  title="TextUtils"  about="About"  mode={mode} toggleMode={toggleMode} />
+    <Router>
+      <Navbar title="TextUtils" mode={mode} showAlert={showAlert} toggleMode={toggleMode}/>
       <div className="container">
-      <TextForm heading="Enter the text to analyze belove" mode={mode}/>
-      <About mode={mode}/>
+        <Alert alert={alert} />
+        <Routes>
+          <Route exact path="/"  element={<TextForm showAlert={showAlert} heading="Enter the text to analyze belove" mode={mode}/>}>  
+          </Route>
+            <Route exact path="/about" element={<About mode={mode}/>}>           
+          </Route>
+      </Routes>
       </div>
-       
-    </div>
+    </Router>
   );
 }
 
