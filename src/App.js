@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
 
-let name = " my name is ajay , how are you guys!!!";
+// let name = " my name is ajay , how are you guys!!!";
 
 function App() {
   //component function
