@@ -5,11 +5,16 @@ import TextForm from "./components/TextForm";
 import About from "./components/About";
 import Alert from "./components/Alert";
 
+<<<<<<< HEAD
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
+=======
+// let name = " my name is ajay , how are you guys!!!";
+
+>>>>>>> 1b552d1ce892d7b566a2dc9d848fa06da7a7fd95
 function App() {
   
   const [mode, setMode] = useState("light");
