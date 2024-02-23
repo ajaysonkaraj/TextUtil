@@ -21,10 +21,8 @@ export default function TextForm(props) {
     setText(event.target.value);
   };
 
-  const handleCopy =()=>{
-    let text = document.getElementById("myBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
+  const handleCopy =()=>{  
+    navigator.clipboard.writeText(text);
     props.showAlert("Text copied" ,"success");
   }
 
@@ -52,26 +50,26 @@ export default function TextForm(props) {
         <textarea className="form-control " value={text} onChange={handleOnChange}
         style={{backgroundColor:props.mode==='dark'?'#22303c':'white',color:props.mode==='dark'?'white':'#343a40'}} id="myBox" rows="7"
         ></textarea>
-        <button className="btn btn-primary my-2" onClick={handleUpClick}>
+        <button disabled={text.length===0} className="btn btn-primary my-2 mx-2" onClick={handleUpClick}>
           Convert to Uppercase
         </button>
-        <button className="btn btn-primary my-2 mx-2" onClick={handleLcClick}>
+        <button disabled={text.length===0} className="btn btn-primary my-2 mx-2" onClick={handleLcClick}>
           Convert to Lowercase
         </button>
-        <button className="btn btn-primary my-2 mx-2" onClick={handleCopy}>
+        <button disabled={text.length===0} className="btn btn-primary my-2 mx-2" onClick={handleCopy}>
           Copy Text
         </button>
-        <button className="btn btn-primary my-2 mx-2" onClick={handleExtraSpace}>
+        <button disabled={text.length===0} className="btn btn-primary my-2 mx-2" onClick={handleExtraSpace}>
           Remove Extra Space
         </button>
-        <button className="btn btn-primary my-2 mx-2" onClick={handleClear}>
+        <button disabled={text.length===0} className="btn btn-primary my-2 mx-3" onClick={handleClear}>
           Clear Text
         </button>
       </div>
 
       <div className=" border border-secondary-subtle border-1 rounded-3  my-4">
         <h2 className="mx-4">Your Text Summary</h2>
-        <p className="mx-4">Total words are {text.split(" ").length} ,Total Characters are {text.length}</p>
+        <p className="mx-4">Total words are {text.split(/\s+/).filter((element)=>{return element.length!==0}).length} ,Total Characters are {text.length}</p>
       </div>
       <div className="border border-secondary-subtle border-1 rounded-3">
         <h2 className="mx-4">Preview</h2>
